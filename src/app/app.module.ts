@@ -13,6 +13,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './state/user.effcts';
 import { userReducer } from './state/user.reducer';
+import { taskReducer } from './state/task.reducer';
+import { TaskEffects } from './state/task.effect';
 
 @NgModule({
   declarations: [
@@ -27,10 +29,13 @@ import { userReducer } from './state/user.reducer';
     HttpClientModule,
     NgxDatatableModule,
     FormsModule,
-    StoreModule.forRoot({user:userReducer}),
+    StoreModule.forRoot({user:userReducer,task:taskReducer}),
     StoreModule.forFeature('users', userReducer),
-    EffectsModule.forRoot([UserEffects]),
-    EffectsModule.forFeature([UserEffects])
+    StoreModule.forFeature('tasks', taskReducer),
+    EffectsModule.forRoot([UserEffects,TaskEffects]),
+    EffectsModule.forFeature([UserEffects]),
+    EffectsModule.forFeature([TaskEffects]),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

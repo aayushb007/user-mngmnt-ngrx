@@ -1,15 +1,28 @@
 <div class="container p-5 bg-light">
 
     <h1>Tasks </h1>
+    <h2><a class="btn btn-primary" [routerLink]="['/task/add']">Add Task</a></h2>
     <ngx-datatable  #tables class="material custom-data-table"  [rows]="tasks" 
     [columnMode]="'force'"  [headerHeight]="50" [footerHeight]="50"  [rowHeight]="'auto'" [scrollbarH]="true" 
-    [sorts]="sortField"  [limit]="5" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event.offset + 1)"
+    [sorts]="sortField"  [limit]="15" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event.offset + 1)"
    >
    <ngx-datatable-column name="Id" prop="id"></ngx-datatable-column>
    <ngx-datatable-column name="Type" prop="taskType"></ngx-datatable-column>
    <ngx-datatable-column name="Title" prop="title"></ngx-datatable-column>
    <ngx-datatable-column name="Status" prop="status"></ngx-datatable-column>
    <ngx-datatable-column name="User" prop="user.name"></ngx-datatable-column>
-   
+   <ngx-datatable-column name="Action">
+    <ng-template ngx-datatable-cell-template let-row="row">
+        <a class="text-primary" data-toggle="tooltip" data-placement="center" title="Delete plant"
+         style="border: none;" (click)="deleteTask(row.id)">
+        <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg"
+          class="icon-svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M10.5 0.25H5.5V1.5H10.5V0.25ZM0.5 2.75V4H1.75V16.5C1.75 17.1904 2.30964 17.75 3 17.75H13C13.6904 17.75 14.25 17.1904 14.25 16.5V4H15.5V2.75H0.5ZM3 16.5V4H13V16.5H3ZM5.5 6.5H6.75V14H5.5V6.5ZM10.5 6.5H9.25V14H10.5V6.5Z"
+            fill="#777986" />
+        </svg>
+      </a>
+    </ng-template>
+    </ngx-datatable-column>
 </ngx-datatable>
  </div>

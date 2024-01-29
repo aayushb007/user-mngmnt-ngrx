@@ -1,1 +1,66 @@
-<p>task-create-edit works!</p>
+<div class="row bg-light m-5 p-5">
+    <div class="col-xs-12">
+        <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+            <h1>Create Task</h1>
+            
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <input type="text" id="title" formControlName="title" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" id="desc" formControlName="desc" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="user_id">User</label>
+                        <input type="text" id="user_id" formControlName="user_id" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Due Date</label>
+                        <input type="date" id="due_date" formControlName="due_date" class="form-control" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <label for="name"> Status </label>
+            <div class="input-group ">
+              
+                
+                <select class="select" id="status" formControlName="status" class="form-control"> 
+                
+                  <option value="Pending">Pending</option>
+                  <option value="Complete">Complete</option>
+                  <option value="On Hold">On Hold</option>
+                  <option value="Overdue">Overdue</option>
+                </select>
+              </div></div></div>
+            
+           
+            <br>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary">ADD</button>&nbsp;
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
