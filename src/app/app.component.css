@@ -1,0 +1,14 @@
+.background-scroll {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .bg-image {
+    background-image: url('https://images.pexels.com/photos/354939/pexels-photo-354939.jpeg?auto=compress&cs=tinysrgb');
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    height: 890px;
+    /* transition: background-position 0.5s ease; */
+  }
+  
+  
