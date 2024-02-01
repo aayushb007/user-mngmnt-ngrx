@@ -8,6 +8,8 @@ import { AppState } from 'src/app/state/app.state.interface';
 import { Task } from 'src/app/state/task.model';
 import { errorSelector, isLoadingSelector, tasksSelector } from 'src/app/state/task.selectors';
 import * as TasksAction from 'src/app/state/task.actions';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -15,6 +17,8 @@ import * as TasksAction from 'src/app/state/task.actions';
 })
 export class TaskComponent {
   tasks$: Observable<Task[]>;
+  public taskId:any
+  public isEdit = false;
   tasks!: any[];
   isLoading$: Observable<boolean>;
   error$: Observable<string | null>;
@@ -24,21 +28,27 @@ export class TaskComponent {
   @ViewChild("tables") table!: DatatableComponent;
   @ViewChild("content", { static: false }) content!: TemplateRef<any>;
   public pager = new Pager();
-  constructor(private taskService:TaskService,private store: Store<AppState>) {
+  constructor(private taskService:TaskService, private route: ActivatedRoute,private store: Store<AppState>,private router:Router) {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(errorSelector));
     this.tasks$ = this.store.pipe(select(tasksSelector));
     
    }
-  async ngOnInit() {
+  ngOnInit() {
+   
     this.store.dispatch(TasksAction.loadTasks());
     this.tasks$.subscribe((task:any)=>{ this.tasks =task,this.pager.total = 10} )    
     console.log(this.tasks);
 
   }
+
   pageChange(page:any) {
     this.pageNo = page;
   
+  }
+  navigateToEdit(id:any){
+    this.router.navigate([`task/edit`, id]);
+   
   }
  
   deleteTask(taskId: any): void {

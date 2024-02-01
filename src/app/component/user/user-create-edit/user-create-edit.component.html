@@ -1,34 +1,32 @@
 <div class="bg-light">
 <div class="row ">
-    <div class="col-12">
-    <div class="card-top-header">
-      <div class="left-sec">
-        <h2>{{ isEdit ? "Edit" : "Add" }} Details</h2>
-
-      </div>
-    </div>
-    </div>
+   
   </div>
   <div class="container">
     <div class="container p-5">
         <div class="card-content-top-header">
-            <h4>Please enter the details</h4>
+          <h2>{{ isEdit ? "Edit" : "Add" }} Details</h2>
           </div>
           <div class="container">
             <form (ngSubmit)="isEdit ? onSubmit() : onAdd()">
                 <div>
                   <label for="name">Name:</label>
                   <input type="text"  class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
+                  <div *ngIf="!user.name" class="text-danger">Name is required.</div>            
                 </div>
               
                 <div>
                   <label for="email">Email:</label>
                   <input type="email"   class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
+                  <div *ngIf="!user.email" class="text-danger">Email is required.</div>            
+
                 </div>
               
                 <div>
                   <label for="password">Password:</label>
                   <input type="password"  class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
+                  <div *ngIf="!user.password" class="text-danger">Password is required.</div>            
+
                 </div>
               
                 <div class="m-3">

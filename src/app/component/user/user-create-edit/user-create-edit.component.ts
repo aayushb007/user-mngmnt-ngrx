@@ -17,7 +17,7 @@ export class UserCreateEditComponent {
     email: '',
     password: ''
   };
-  constructor(  private fb: FormBuilder,
+  constructor(private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService

@@ -13,6 +13,15 @@
    <ngx-datatable-column name="User" prop="user.name"></ngx-datatable-column>
    <ngx-datatable-column name="Action">
     <ng-template ngx-datatable-cell-template let-row="row">
+      <a class="text-primary" data-toggle="tooltip" data-placement="top" title="Edit plant"
+        (click)="navigateToEdit(row.id)">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"
+          class="icon-svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M0.25 15.8748H17.75V17.1248H0.25V15.8748ZM14.8813 4.62481C15.116 4.39035 15.2479 4.0722 15.2479 3.74044C15.2479 3.40867 15.116 3.09052 14.8813 2.85606L12.6438 0.618561C12.4093 0.38384 12.0911 0.251953 11.7594 0.251953C11.4276 0.251953 11.1095 0.38384 10.875 0.618561L1.5 9.99356V13.9998H5.50625L14.8813 4.62481ZM11.7563 1.49981L14 3.74356L12.125 5.61856L9.88125 3.37481L11.7563 1.49981ZM2.75 12.7498V10.5061L9 4.25606L11.2437 6.49981L4.99375 12.7498H2.75Z"
+            fill="#777986" />
+        </svg>
+      </a>
         <a class="text-primary" data-toggle="tooltip" data-placement="center" title="Delete plant"
          style="border: none;" (click)="deleteTask(row.id)">
         <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg"

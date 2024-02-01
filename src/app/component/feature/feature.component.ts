@@ -1,4 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { Pager } from 'src/app/model/pager';
 import { FeatureService } from 'src/app/service/feature.service';
@@ -17,7 +18,7 @@ export class FeatureComponent {
   @ViewChild("tables") table!: DatatableComponent;
   @ViewChild("content", { static: false }) content!: TemplateRef<any>;
   public pager = new Pager();
-  constructor(private featureService:FeatureService) { }
+  constructor(private featureService:FeatureService,private router:Router) { }
   async ngOnInit() {
 
     await this.getFeatures();
@@ -31,7 +32,7 @@ export class FeatureComponent {
   async getFeatures(pageNo?: any, limit?: any) {
     let data = {
       page: pageNo ? pageNo : this.pageNo,
-      limit: limit ? limit : 5,
+      limit: limit ? limit : 15,
     };
     var usersResponse:any = await this.featureService.getFeatures(data).toPromise();
     if (usersResponse) {
@@ -42,5 +43,12 @@ export class FeatureComponent {
     console.log(this.features);
 
 
+  }
+  navigateToEdit(id:any){
+    this.router.navigate([`feature/edit`, id]);
+   
+  }
+  deleteTask(Id: any): void {
+    
   }
 }

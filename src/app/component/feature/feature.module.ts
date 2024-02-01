@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FeatureCreateEditComponent } from './feature-create-edit/feature-create-edit.component';
 import { FeatureDetailComponent } from './feature-detail/feature-detail.component';
 import { FeatureRoutingModule } from './feature-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,8 @@ import { FeatureRoutingModule } from './feature-routing.module';
   ],
   imports: [
     FeatureRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule
   ]
 })

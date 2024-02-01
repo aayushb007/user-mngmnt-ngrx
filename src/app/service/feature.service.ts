@@ -19,13 +19,12 @@ export class FeatureService {
       })
     );
   }
+  addFeature(feature : any): Observable<any>{
+    return this.http.post<any>(`${this.url}`, feature);
+
+  }
   getFeatureDetail(id:number):Observable<any>{
-    return this.http.get<any>(`${this.url}/${id}`).pipe(
-      map((response: any) => {
-        console.log(response);
-        return response;
-      })
-    );
+    return this.http.get<any>(`${this.url}/${id}`)
 
   }
   editFeature(id: number, newTask: any){
