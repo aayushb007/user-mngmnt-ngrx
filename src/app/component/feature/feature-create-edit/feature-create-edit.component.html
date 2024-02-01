@@ -1,1 +1,268 @@
-<p>feature-create-edit works!</p>
+<!-- <div class="row bg-light m-5 p-5">
+    <div class="col-xs-12">
+        <form [formGroup]="newForm" (ngSubmit)="onSubmit()">
+            <h1>Create Task</h1>
+            
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Title</label>
+                        <input type="text" id="title" formControlName="title" class="form-control" required>
+                        <div *ngIf="!newForm.controls['title'].valid" class="text-danger">
+                            {{ getValidationMessage('title') }}
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" id="desc" formControlName="desc" class="form-control" required>
+                        <div *ngIf="!newForm.controls['desc'].valid" class="text-danger">
+                            {{ getValidationMessage('desc') }}
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="user_id">User</label>
+                        <input type="text" id="task_id" formControlName="task_id" class="form-control" required>
+                        <div *ngIf="!newForm.controls['task_id'].valid" class="text-danger">
+                            {{ getValidationMessage('task_id') }}
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Start Date</label>
+                        <input type="date" id="start_date" formControlName="start_date" class="form-control" required>
+                        <div *ngIf="!newForm.controls['start_date'].valid" class="text-danger">
+                            {{ getValidationMessage('start_date') }}
+                          </div>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="row mt-2">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <label for="name">Due Date</label>
+                        <input type="date" id="due_date" formControlName="due_date" class="form-control" required>
+                        <div *ngIf="!newForm.controls['due_date'].valid" class="text-danger">
+                            {{ getValidationMessage('due_date') }}
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="task_id">Task</label>
+                <select id="task_id" formControlName="task_id" class="form-control" required>
+                  <option [value]="null" disabled>Select a Task</option>
+                  <option *ngFor="let task of tasks" [value]="task.id">{{ task.title }}</option>
+                </select>
+                <div *ngIf="!newForm.controls['task_id'].valid" class="text-danger">
+                  {{ getValidationMessage('task_id') }}
+                </div>
+              </div>
+            <br>
+            <div class="form-group">
+                <label for="user_id">User</label>
+                <select id="selectedUser" formControlName="selectedUser" class="form-control" required>
+                  <option [value]="null" disabled>Select a user</option>
+                  <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+                </select>
+                <div *ngIf="!newForm.controls['selectedUser'].valid" class="text-danger">
+                  {{ getValidationMessage('selectedUser') }}
+                </div>
+              </div>
+            <br>
+            
+            <div class="row">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary">ADD</button>&nbsp;
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div> -->
+<div class="row bg-light m-5 p-5">
+  <div class="col-xs-12">
+    <form [formGroup]="newForm" >
+      <h2>{{ isEdit ? "Edit" : "Add" }} Details</h2>
+
+      <div class="row mt-2">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Title</label>
+            <input
+              type="text"
+              id="title"
+              formControlName="title"
+              class="form-control"
+              required
+            />
+            <div
+              *ngIf="
+                newForm.get('title')?.hasError('required') &&
+                (newForm.get('title')?.touched || newForm.get('title')?.dirty)
+              "
+              class="text-danger"
+            >
+              Title is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Description</label>
+            <input
+              type="text"
+              id="desc"
+              formControlName="desc"
+              class="form-control"
+              required
+            />
+            <div
+              *ngIf="
+                newForm.get('desc')?.hasError('required') &&
+                (newForm.get('desc')?.touched || newForm.get('desc')?.dirty)
+              "
+              class="text-danger"
+            >
+              Description is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Start Date</label>
+            <input
+              type="date"
+              id="start_date"
+              formControlName="start_date"
+              class="form-control"
+              required
+            />
+            <div
+              *ngIf="
+                newForm.get('start_date')?.hasError('required') &&
+                (newForm.get('start_date')?.touched ||
+                  newForm.get('start_date')?.dirty)
+              "
+              class="text-danger"
+            >
+            Start Date is required.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Due Date</label>
+            <input
+              type="date"
+              id="due_date"
+              formControlName="due_date"
+              class="form-control"
+              required
+            />
+            <div
+              *ngIf="
+                newForm.get('task_id')?.hasError('required') &&
+                (newForm.get('task_id')?.touched ||
+                  newForm.get('task_id')?.dirty)
+              "
+              class="text-danger"
+            >
+            Due Date is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="task_id">Task</label>
+        <select
+          id="task_id"
+          formControlName="task_id"
+          class="form-control"
+          required
+        >
+          <option [value]="null" disabled>Select a Task</option>
+          <option *ngFor="let task of tasks" [value]="task.id">
+            {{ task.title }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            newForm.get('task_id')?.hasError('required') &&
+            (newForm.get('task_id')?.touched || newForm.get('task_id')?.dirty)
+          "
+          class="text-danger"
+        >
+          Task is required.
+        </div>
+      </div>
+      <br />
+      <div class="form-group">
+        <label for="user_id">User</label>
+        <select
+          id="selectedUser"
+          formControlName="selectedUser"
+          class="form-control"
+          required
+        >
+          <option [value]="null" disabled>Select a user</option>
+          <option *ngFor="let user of users" [value]="user.id">
+            {{ user.name }}
+          </option>
+        </select>
+
+        <div
+          *ngIf="
+            newForm.get('selectedUser')?.hasError('required') &&
+            (newForm.get('selectedUser')?.touched ||
+              newForm.get('selectedUser')?.dirty)
+          "
+          class="text-danger">
+          
+        User is required.
+        </div>
+      </div>
+      <br />
+      <div class="row mt-2">
+        <div class="col-xs-12">
+            <label for="name"> Status </label>
+    <div class="input-group ">
+        <select class="select" id="status" formControlName="status" class="form-control"> 
+          <option value="Pending">Pending</option>
+          <option value="Complete">Complete</option>
+          <option value="On Hold">On Hold</option>
+          <option value="Overdue">Overdue</option>
+        </select>
+      </div></div></div>
+
+      <br>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary" *ngIf="isEdit" (click)="onEdit()">EDIT</button>&nbsp;
+          <button type="submit" class="btn btn-primary" *ngIf="!isEdit" (click)="onSubmit()">ADD</button>&nbsp;
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
