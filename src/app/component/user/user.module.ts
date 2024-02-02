@@ -5,9 +5,6 @@ import { UserCreateEditComponent } from './user-create-edit/user-create-edit.com
 import { UserRoutingModule } from './user-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-
-
 @NgModule({
   declarations: [
     UserDetailsComponent,
