@@ -4,6 +4,15 @@
   "newProjectRoot": "projects",
   "projects": {
     "user-mngmnt-angular": {
+      "i18n":{
+              "sourceLocale":"en-US",
+              "locales":{
+                "fr-FR":{
+                  "translation":"src/locale/messages.ar.xlf",
+                  "baseHref":"fr-FR/"
+                }
+              }
+      },
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +22,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/user-mngmnt-angular",
+            "localize":[
+             "fr-FR"
+            ],
+            "outputPath": "dist/user-mngmnt-angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -103,6 +115,60 @@
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/user-mngmnt-angular/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "user-mngmnt-angular:build:development",
+              "serverTarget": "user-mngmnt-angular:server:development"
+            },
+            "production": {
+              "browserTarget": "user-mngmnt-angular:build:production",
+              "serverTarget": "user-mngmnt-angular:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "user-mngmnt-angular:build:production",
+              "serverTarget": "user-mngmnt-angular:server:production"
+            },
+            "development": {
+              "browserTarget": "user-mngmnt-angular:build:development",
+              "serverTarget": "user-mngmnt-angular:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

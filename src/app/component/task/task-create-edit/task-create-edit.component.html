@@ -8,9 +8,18 @@
                     <div class="form-group">
                         <label for="name">Title</label>
                         <input type="text" id="title" formControlName="title" class="form-control" required>
-                        <div *ngIf="!newForm.controls['title'].valid" class="text-danger">
+                        <!-- <div *ngIf="!newForm.controls['title'].valid" class="text-danger">
                             {{ getValidationMessage('title') }}
-                          </div>
+                          </div> -->
+                          <div
+              *ngIf="
+                newForm.get('title')?.hasError('required') &&
+                (newForm.get('title')?.touched || newForm.get('title')?.dirty)
+              "
+              class="text-danger"
+            >
+              Title is required.
+            </div>
                     </div>
                 </div>
             </div>
@@ -19,9 +28,18 @@
                     <div class="form-group">
                         <label for="name">Description</label>
                         <input type="text" id="desc" formControlName="desc" class="form-control" required>
-                        <div *ngIf="!newForm.controls['desc'].valid" class="text-danger">
+                        <!-- <div *ngIf="!newForm.controls['desc'].valid" class="text-danger">
                             {{ getValidationMessage('desc') }}
-                          </div>
+                          </div> -->
+                          <div
+              *ngIf="
+                newForm.get('desc')?.hasError('required') &&
+                (newForm.get('desc')?.touched || newForm.get('desc')?.dirty)
+              "
+              class="text-danger"
+            >
+              Description is required.
+            </div>
                     </div>
                 </div>
             </div>
@@ -30,9 +48,19 @@
                     <div class="form-group">
                         <label for="user_id">User</label>
                         <input type="text" id="user_id" formControlName="user_id" class="form-control" required>
-                        <div *ngIf="!newForm.controls['user_id'].valid" class="text-danger">
+                        <!-- <div *ngIf="!newForm.controls['user_id'].valid" class="text-danger">
                             {{ getValidationMessage('user_id') }}
-                          </div>
+                          </div> -->
+                          <div
+                          *ngIf="
+                            newForm.get('user_id')?.hasError('required') &&
+                            (newForm.get('user_id')?.touched ||
+                              newForm.get('user_id')?.dirty)
+                          "
+                          class="text-danger"
+                        >
+                        User is required.
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -42,9 +70,19 @@
                     <div class="form-group">
                         <label for="name">Due Date</label>
                         <input type="date" id="due_date" formControlName="due_date" class="form-control" required>
-                        <div *ngIf="!newForm.controls['due_date'].valid" class="text-danger">
+                        <!-- <div *ngIf="!newForm.controls['due_date'].valid" class="text-danger">
                             {{ getValidationMessage('due_date') }}
-                          </div>
+                          </div> -->
+                          <div
+                          *ngIf="
+                            newForm.get('due_date')?.hasError('required') &&
+                            (newForm.get('due_date')?.touched ||
+                              newForm.get('due_date')?.dirty)
+                          "
+                          class="text-danger"
+                        >
+                        Due Date is required.
+                        </div> 
                     </div>
                 </div>
             </div>

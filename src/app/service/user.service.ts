@@ -1,10 +1,17 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, Subject, map } from 'rxjs';
+import { Observable, Subject, catchError, map } from 'rxjs';
 import { Task } from '../users.model';
 import { HttpClient } from '@angular/common/http';
+interface LoginResponse {
+  token: string;
+  email: string;
+   user: any ;
+}
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class UserService {
   userChanged = new Subject<any[]>();
   userSelected = new EventEmitter<any>();
@@ -31,5 +38,23 @@ export class UserService {
     return this.http.delete<any>(`${this.url}/${id}`)
 
   }
+  login(email: string, password: string): Observable<LoginResponse>  {{
+    console.log('Wow.................. service called');
+    
+    const credentials = { email, password };
+   return this.http.post<LoginResponse>(`${this.url}/login`, credentials)
+   .pipe(
+    map((res) => {
+  console.log(res.token);
+  
+      return res;}),
+    catchError((error)=>{
+      console.log('Login Error:',error );
+      throw error
+    })
+    
+   )
+  }
 
+}
 }
