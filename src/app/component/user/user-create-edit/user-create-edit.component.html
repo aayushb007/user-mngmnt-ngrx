@@ -4,38 +4,44 @@
   </div>
   <div class="container">
     <div class="container p-5">
-        <div class="card-content-top-header">
-          <h2>{{ isEdit ? "Edit" : "Add" }} Details</h2>
+      <div class="card-content-top-header">
+        <h2>{{ isEdit ? "Edit" : "Add" }} Details</h2>
+      </div>
+      <div class="container">
+        <form (ngSubmit)="isEdit ? onSubmit() : onAdd()" #userForm="ngForm" novalidate>
+  
+          <div>
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+              <div *ngIf="name.errors?.['required']">Name is required.</div>
+            </div>
           </div>
-          <div class="container">
-            <form (ngSubmit)="isEdit ? onSubmit() : onAdd()">
-                <div>
-                  <label for="name">Name:</label>
-                  <input type="text"  class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
-                  <div *ngIf="!user.name" class="text-danger">Name is required.</div>            
-                </div>
-              
-                <div>
-                  <label for="email">Email:</label>
-                  <input type="email"   class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
-                  <div *ngIf="!user.email" class="text-danger">Email is required.</div>            
-
-                </div>
-              
-                <div>
-                  <label for="password">Password:</label>
-                  <input type="password"  class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
-                  <div *ngIf="!user.password" class="text-danger">Password is required.</div>            
-
-                </div>
-              
-                <div class="m-3">
-                  <button type="submit"  class="btn btn-primary " *ngIf="isEdit">Edit</button>
-                  <button type="submit"  class="btn btn-primary "  *ngIf="!isEdit">Add</button>
-                  
-                </div>
-              </form>
+  
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required #email="ngModel" disabled="isEdit">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger" >
+              <div *ngIf="email.errors?.['required']">Email is required.</div>
+              <div *ngIf="email.errors?.['email']">Invalid email format.</div>
+            </div>
           </div>
+  
+          <!-- <div>
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required #password="ngModel">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger">
+              <div *ngIf="password.errors?.['required']">Password is required.</div>
+            </div>
+          </div> -->
+  
+          <div class="m-3">
+            <button type="submit" class="btn btn-primary " *ngIf="isEdit">Edit</button>
+            <button type="submit" class="btn btn-primary " *ngIf="!isEdit">Add</button>
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  
 </div>

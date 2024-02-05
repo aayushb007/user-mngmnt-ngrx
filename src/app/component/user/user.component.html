@@ -7,7 +7,7 @@
 
     <ngx-datatable  #tables class="material custom-data-table"  [rows]="users" 
     [columnMode]="'force'"  [headerHeight]="50" [footerHeight]="50"  [rowHeight]="'auto'" [scrollbarH]="true" 
-    [sorts]="sortField"  [limit]="5" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event.offset + 1)"
+    [sorts]="sortField"  [limit]="15" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event.offset + 1)"
    >
    <ngx-datatable-column name="Id" prop="id"></ngx-datatable-column>
    <ngx-datatable-column name="Name" prop="name"></ngx-datatable-column>
