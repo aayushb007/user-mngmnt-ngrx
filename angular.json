@@ -7,9 +7,9 @@
       "i18n":{
               "sourceLocale":"en-US",
               "locales":{
-                "fr-FR":{
-                  "translation":"src/locale/messages.ar.xlf",
-                  "baseHref":"fr-FR/"
+                "hi-IN":{
+                  "translation":"src/locale/messages.hi.xlf",
+                  "baseHref":"hi-IN/"
                 }
               }
       },
@@ -23,7 +23,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize":[
-             "fr-FR"
+             "hi-IN"
             ],
             "outputPath": "dist/user-mngmnt-angular/browser",
             "index": "src/index.html",
@@ -55,12 +55,12 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumError": "9kb"
                 }
               ],
               "outputHashing": "all"
