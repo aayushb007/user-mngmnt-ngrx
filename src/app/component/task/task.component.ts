@@ -16,6 +16,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent {
+  public pageSize = 5; // Number of items per page
+public page: number = 1; // Initial page
+public pagedTasks: Task[] = [];
   tasks$: Observable<Task[]>;
   public taskId:any
   public isEdit = false;
@@ -37,18 +40,39 @@ export class TaskComponent {
   ngOnInit() {
    
     this.store.dispatch(TasksAction.loadTasks());
-    this.tasks$.subscribe((task:any)=>{ this.tasks =task,this.pager.total = 10} )    
+    this.tasks$.subscribe((task:any)=>{ console.log(task);
+     this.tasks =task;
+     this.pagedTasks = this.tasks
+     this.updatePagedTasks();} )    
     console.log(this.tasks);
 
   }
 
   pageChange(page:any) {
-    this.pageNo = page;
-  
+    this.page = page.offset + 1;
+    console.log(this.page);
+    
+    this.updatePagedTasks();
+  }
+  updatePagedTasks(): void {
+    const startIndex = (this.page - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    console.log(this.tasks);
+    console.log(startIndex,endIndex);
+    
+    this.pagedTasks = this.tasks.slice(startIndex, endIndex);
+    console.log(this.pagedTasks);
+    
+    this.pager.total = this.tasks.length;
   }
   navigateToEdit(id:any){
     this.router.navigate([`task/edit`, id]);
    
+  }
+
+  getTaskById(id:any){
+    this.router.navigate([`task/details`, id]);
+
   }
  
   deleteTask(taskId: any): void {

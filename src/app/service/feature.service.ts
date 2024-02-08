@@ -25,7 +25,10 @@ export class FeatureService {
   }
   getFeatureDetail(id:number):Observable<any>{
     return this.http.get<any>(`${this.url}/${id}`)
-
+  }
+  
+  deleteFeature(id:number):Observable<any>{
+    return this.http.delete<any>(`${this.url}/${id}`)
   }
   editFeature(id: number, newTask: any){
     return this.http

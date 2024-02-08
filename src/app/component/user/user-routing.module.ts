@@ -7,6 +7,7 @@ import { UserComponent } from './user.component';
 
 
 const routes: Routes = [
+  
       {
       path: 'add',
       component: UserCreateEditComponent,

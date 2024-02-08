@@ -1,10 +1,19 @@
 <div class="container p-5 bg-light">
 
-    <h1>Tasks </h1>
-    <h2><a class="btn btn-primary" [routerLink]="['/task/add']">Add Task</a></h2>
-    <ngx-datatable  #tables class="material custom-data-table"  [rows]="tasks" 
+  <div class="row mb-3">
+    <div class="col-10">
+      <h1>Tasks </h1>
+
+    </div>
+    <div class="col-2">
+      <h2><a class="btn btn-primary" [routerLink]="['/task/add']">Add Task</a></h2>
+    </div>
+  </div>
+
+
+    <ngx-datatable  #tables class="material custom-data-table"  [rows]="pagedTasks" 
     [columnMode]="'force'"  [headerHeight]="50" [footerHeight]="50"  [rowHeight]="'auto'" [scrollbarH]="true" 
-    [sorts]="sortField"  [limit]="15" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event.offset + 1)"
+    [sorts]="sortField"  [limit]="5" [externalPaging]="true"   [count]="pager.total" (page)="pageChange($event)"
    >
    <ngx-datatable-column name="Id" prop="id"></ngx-datatable-column>
    <ngx-datatable-column name="Type" prop="taskType"></ngx-datatable-column>
@@ -13,6 +22,15 @@
    <ngx-datatable-column name="User" prop="user.name"></ngx-datatable-column>
    <ngx-datatable-column name="Action">
     <ng-template ngx-datatable-cell-template let-row="row">
+      <a class="ml-1 text-danger" (click)="getTaskById(row.id)" data-toggle="tooltip"
+      data-placement="top" title="View plant">
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+        class="icon-svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M19.3377 6.7875C17.8352 2.90106 14.164 0.28158 10.0002 0.125C5.83641 0.28158 2.1652 2.90106 0.662722 6.7875C0.613077 6.92482 0.613077 7.07518 0.662722 7.2125C2.1652 11.0989 5.83641 13.7184 10.0002 13.875C14.164 13.7184 17.8352 11.0989 19.3377 7.2125C19.3874 7.07518 19.3874 6.92482 19.3377 6.7875ZM6.25 7C6.25 4.92893 7.92893 3.25 10 3.25C12.0711 3.25 13.75 4.92893 13.75 7C13.75 9.07107 12.0711 10.75 10 10.75C7.92893 10.75 6.25 9.07107 6.25 7ZM7.5 7C7.5 8.38071 8.61929 9.5 10 9.5C10.663 9.5 11.2989 9.23661 11.7678 8.76777C12.2366 8.29893 12.5 7.66304 12.5 7C12.5 5.61929 11.3807 4.5 10 4.5C8.61929 4.5 7.5 5.61929 7.5 7ZM1.91897 7C3.18772 10.1687 6.68772 12.625 10.0002 12.625C13.3127 12.625 16.8127 10.1687 18.0815 7C16.8127 3.83125 13.3127 1.375 10.0002 1.375C6.68772 1.375 3.18772 3.83125 1.91897 7Z"
+          fill="#777986" />
+      </svg>
+    </a>
       <a class="text-primary" data-toggle="tooltip" data-placement="top" title="Edit plant"
         (click)="navigateToEdit(row.id)">
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"

@@ -1,1 +1,16 @@
 <p>feature-detail works!</p>
+<div class="card text-center container"  *ngIf="feature">
+    <div class="card-header">
+      Feature
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{feature.title}}</h5>
+      <p class="card-text">{{ feature.description}}</p>
+      <p class="card-text">{{ feature.task.title}}</p>
+
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+    <div class="card-footer text-body-secondary">
+           {{feature.status}}
+    </div>
+  </div>

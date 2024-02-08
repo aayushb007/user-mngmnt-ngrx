@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TaskService } from 'src/app/service/task.service';
+import { UserService } from 'src/app/service/user.service';
 import { AppState } from 'src/app/state/app.state.interface';
 import { addTask } from 'src/app/state/task.actions';
 import { Task } from 'src/app/state/task.model';
@@ -16,7 +17,7 @@ export class TaskCreateEditComponent {
   task!: Task[];
   public taskId:any
   public isEdit = false;
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router,private store: Store<AppState>) { }
+  constructor(private taskService: TaskService,private userService:UserService, private route: ActivatedRoute, private router: Router,private store: Store<AppState>) { }
   newForm!: FormGroup;
   userId!:string | null;
   user_id!:string;
@@ -24,18 +25,65 @@ export class TaskCreateEditComponent {
   desc!:string;
   due_date!:string;
   status!:string;
+    users!: any[];
   async ngOnInit(){
     this.initForm();
+    this.getUsers();
     this.taskId = this.route.snapshot.paramMap.get("id");
     if(this.taskId){
      this.isEdit = true;
      await this.checkrouterparameter();
     }
   }
+   async getUsers(){
+    let data = {
+      page: 1,
+      limit: 1000,
+    };
+   
+    var usersResponse:any = await this.userService.getUsers(data).toPromise();
+    if (usersResponse) {
+
+      this.users = usersResponse.users;
+   
+    }
+    console.log(this.users);
+
+  }
   async checkrouterparameter() {
     this.taskService.getTaskDetail(this.taskId).subscribe((result:any)=>{
-      console.log(result.users);
-      // this.user = result.t;
+      console.log(result.task);
+      var f = result.task;
+      var startDate = f.startDate;
+      var dueDate = f.dueDate;
+
+      var sdate;
+      var ddate;
+      if (typeof startDate === 'string') {
+        startDate = new Date(startDate);
+        dueDate = new Date(dueDate);
+      }
+      
+      // Check if startDate is a valid Date object
+      if (startDate instanceof Date) {
+        // Format the date as yyyy-mm-dd
+        var formattedStartDate = startDate.toISOString().split('T')[0];
+        var formattedDueDate = startDate.toISOString().split('T')[0];
+
+        sdate = formattedStartDate;
+        ddate= formattedDueDate;
+        // Now, formattedStartDate contains the date in "yyyy-mm-dd" format
+        console.log(formattedStartDate);
+      } else {
+        console.error("Invalid startDate");
+      }
+       this.newForm.patchValue({
+       title : result.task.title,
+       desc : result.task.description,
+       status : result.task.status,
+       due_date : ddate,
+       user_id : result.task.userId
+       })
       })
   }
   private initForm() {

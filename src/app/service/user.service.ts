@@ -19,9 +19,7 @@ export class UserService {
   constructor(private http:HttpClient,private router:Router) { }
   url = "http://localhost:3005/users";
   isAuthenticated(): boolean {
-    // Check if the user is authenticated (e.g., check a token in local storage)
-    // Return true if authenticated, false otherwise
-    return localStorage.getItem('token') !== null;
+        return localStorage.getItem('token') !== null;
   }
   getUsers(obj: any):Observable<any[]>{
     console.log('yes going ');

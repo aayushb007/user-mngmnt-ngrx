@@ -1,8 +1,14 @@
 <div class="container p-5 bg-light">
+    <div class="row mb-3">
+      <div class="col-10">
+        <h1>Users </h1>
 
-    <h1>Users </h1>
+      </div>
+      <div class="col-2">
+       <h2><a class="btn btn-primary" [routerLink]="['/user/add']">Add User</a></h2>
+      </div>
+    </div>
   
-    <h2><a class="btn btn-primary" [routerLink]="['/user/add']">Add User</a></h2>
 
 
     <ngx-datatable  #tables class="material custom-data-table"  [rows]="users" 

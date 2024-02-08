@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class UserCreateEditComponent {
   constructor(private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private toastr: ToastrService
 ){}
 
 async ngOnInit(){

@@ -48,7 +48,16 @@ export class FeatureComponent {
     this.router.navigate([`feature/edit`, id]);
    
   }
-  deleteTask(Id: any): void {
-    
+  delete(Id: any): void {
+    this.featureService.deleteFeature(Id).subscribe(data => {
+      console.log(data);
+      this.getFeatures();
+      
+    })
+  }
+  getFeatureById(id:any){
+    this.router.navigate([`feature/details/`, id]);
+
+   
   }
 }

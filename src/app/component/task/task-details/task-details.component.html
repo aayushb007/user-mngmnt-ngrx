@@ -1,1 +1,13 @@
-<p>task-details works!</p>
+<div class="card text-center container"  *ngIf="task">
+    <div class="card-header">
+      Task
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{task.title}}</h5>
+      <p class="card-text">{{ task.description}}</p>
+      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+    <div class="card-footer text-body-secondary">
+      {{task.status}}
+    </div>
+  </div>

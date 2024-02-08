@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { UserService } from 'src/app/service/user.service';
 export class LoginComponent {
   loginForm!: FormGroup;
   er!: string;
-  constructor(private userService: UserService, private router: Router,private store: Store) { }
+  constructor(private userService: UserService, private router: Router,private store: Store,private toastr: ToastrService) { }
  
   ngOnInit(): void {
     if (localStorage.getItem('token')) {
@@ -37,11 +37,11 @@ export class LoginComponent {
   onSubmit() {
     const email = this.loginForm.value['email'];
     const password = this.loginForm.value['password'];
-    console.log('yo', email, password);
+  
     this.userService.login(email, password).subscribe(res => {
       const token = res.token;
       const user = res.user
-      alert("Login successful")
+      this.toastr.success('Login successful');
       localStorage.setItem('token', token);
       localStorage.setItem('name', user.name);
       localStorage.setItem('id', user.email);
