@@ -10,6 +10,10 @@
                 "hi-IN":{
                   "translation":"src/locale/messages.hi.xlf",
                   "baseHref":"hi-IN/"
+                },
+                "fr-FR":{
+                  "translation":"src/locale/messages.ar.xlf",
+                  "baseHref":"fr-FR/"
                 }
               }
       },
@@ -23,7 +27,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize":[
-             "hi-IN"
+             "fr-FR"
             ],
             "outputPath": "dist/user-mngmnt-angular/browser",
             "index": "src/index.html",

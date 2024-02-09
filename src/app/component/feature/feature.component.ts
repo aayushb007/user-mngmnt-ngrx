@@ -1,6 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Pager } from 'src/app/model/pager';
 import { FeatureService } from 'src/app/service/feature.service';
 import { TaskService } from 'src/app/service/task.service';
@@ -18,7 +19,7 @@ export class FeatureComponent {
   @ViewChild("tables") table!: DatatableComponent;
   @ViewChild("content", { static: false }) content!: TemplateRef<any>;
   public pager = new Pager();
-  constructor(private featureService:FeatureService,private router:Router) { }
+  constructor(private featureService:FeatureService,private router:Router, private ngxLoader: NgxUiLoaderService) { }
   async ngOnInit() {
 
     await this.getFeatures();
@@ -30,6 +31,7 @@ export class FeatureComponent {
   }
 
   async getFeatures(pageNo?: any, limit?: any) {
+    // this.ngxLoader.start();
     let data = {
       page: pageNo ? pageNo : this.pageNo,
       limit: limit ? limit : 15,
@@ -39,6 +41,7 @@ export class FeatureComponent {
       this.features = usersResponse.features;
       this.pager.total = usersResponse.totalCount
       console.log(this.features);
+      // this.ngxLoader.stop();
     }
     console.log(this.features);
 

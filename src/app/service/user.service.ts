@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, Subject, catchError, map } from 'rxjs';
 import { Task } from '../users.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 interface LoginResponse {
   token: string;
@@ -14,21 +14,26 @@ interface LoginResponse {
 
 
 export class UserService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization':  localStorage.getItem('token') || ''
+    })
+  }
   userChanged = new Subject<any[]>();
   userSelected = new EventEmitter<any>();
   constructor(private http:HttpClient,private router:Router) { }
   url = "http://localhost:3005/users";
+
   isAuthenticated(): boolean {
         return localStorage.getItem('token') !== null;
   }
+
   getUsers(obj: any):Observable<any[]>{
-    console.log('yes going ');
-    
-    return this.http.get<any[]>(`${this.url}?page=${obj.page}&limit=${obj.limit}`);
+    return this.http.get<any[]>(`${this.url}?page=${obj.page || 1}&limit=${obj.limit || 100}`,this.httpOptions);
   }
   getUserDetail(id:number):Observable<any>{
     return this.http.get<any>(`${this.url}/${id}`)
-
   }
   editUser(id: number, newUser:any){
     return this.http
@@ -48,25 +53,20 @@ export class UserService {
     localStorage.removeItem('name');
     localStorage.removeItem('id');
     this.router.navigate(['/login'])
-
   }
+
   login(email: string, password: string): Observable<LoginResponse>  {{
-    console.log('Wow.................. service called');
-    
-    const credentials = { email, password };
+   const credentials = { email, password };
    return this.http.post<LoginResponse>(`${this.url}/login`, credentials)
    .pipe(
     map((res) => {
-  console.log(res.token);
-  
+    console.log(res.token);
       return res;}),
     catchError((error)=>{
       console.log('Login Error:',error );
       throw error
     })
-    
    )
   }
-
 }
 }
