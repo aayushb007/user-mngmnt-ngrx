@@ -4,19 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "user-mngmnt-angular": {
-      "i18n":{
-              "sourceLocale":"en-US",
-              "locales":{
-                "hi-IN":{
-                  "translation":"src/locale/messages.hi.xlf",
-                  "baseHref":"hi-IN/"
-                },
-                "fr-FR":{
-                  "translation":"src/locale/messages.ar.xlf",
-                  "baseHref":"fr-FR/"
-                }
-              }
-      },
+ 
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -26,10 +14,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize":[
-             "fr-FR"
-            ],
-            "outputPath": "dist/user-mngmnt-angular/browser",
+                       "outputPath": "dist/user-mngmnt-angular/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
